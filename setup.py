@@ -22,7 +22,8 @@ setup(
     platforms='any',
     install_requires=[
         'Flask>=0.12.4',
-        'mysqlclient>=1.3.7'
+        'mysqlclient>=1.3.7',
+        'DBUtils>=1.3'
     ],
     classifiers=[
         'Environment :: Web Environment',
