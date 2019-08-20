@@ -77,15 +77,19 @@ class MySQL(object):
         if app.config['MYSQL_CURSORCLASS']:
             kwargs['cursorclass'] = getattr(cursors, app.config['MYSQL_CURSORCLASS'])
 
+        if app.config['POOL_MAXCONNECTIONS']:
+            kwargs['maxconnections'] = app.config['POOL_MAXCONNECTIONS']
+
+        if app.config['POOL_MINCACHED']:
+            kwargs['mincached'] = app.config['POOL_MAXCONNECTIONS']
+
+        if app.config['POOL_MAXCACHED']:
+            kwargs['maxcached'] = app.config['POOL_MAXCACHED']
+
         self.pooled_db = PooledDB(
             creator=MySQLdb,  # Modules using linked databases
-            maxconnections=1024,  # Maximum number of connections allowed by connection pool, 0 and None denote unrestricted number of connections
-            mincached=1024,  # At the time of initialization, at least an idle link is created in the link pool. 0 means no link is created.
-            maxcached=0,  # The maximum number of idle links in the link pool, 0 and None are unrestricted
-            maxshared=0,  # The maximum number of shared links in the link pool, 0 and None represent all shared links. PS: It's useless, because the threadsafe of modules like pymysql and MySQLdb are all 1. No matter how many values are set, _maxcached is always 0, so all links are always shared.
             blocking=True,  # If there is no connection available in the connection pool, whether to block waiting. True, wait; False, don't wait and report an error
             maxusage=None,  # The maximum number of times a link is reused. None means unlimited.
-            setsession=[],  # A list of commands executed before starting a session. For example: ["set datestyle to...", "set time zone..."]
             ping=0,
             # ping MySQL On the server side, check if the service is available.# For example: 0 = None = never, 1 = Default = when it is requested, 2 = when a cursor is created, 4 = when a query is executed, 7 = always
             **kwargs
