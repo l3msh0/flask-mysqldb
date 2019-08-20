@@ -1,6 +1,6 @@
 import MySQLdb
 from MySQLdb import cursors
-from flask import _app_ctx_stack, current_app
+from flask import _app_ctx_stack
 from DBUtils.PooledDB import PooledDB
 
 class MySQL(object):
@@ -39,43 +39,43 @@ class MySQL(object):
 
         kwargs = {}
 
-        if current_app.config['MYSQL_HOST']:
-            kwargs['host'] = current_app.config['MYSQL_HOST']
+        if app.config['MYSQL_HOST']:
+            kwargs['host'] = app.config['MYSQL_HOST']
 
-        if current_app.config['MYSQL_USER']:
-            kwargs['user'] = current_app.config['MYSQL_USER']
+        if app.config['MYSQL_USER']:
+            kwargs['user'] = app.config['MYSQL_USER']
 
-        if current_app.config['MYSQL_PASSWORD']:
-            kwargs['passwd'] = current_app.config['MYSQL_PASSWORD']
+        if app.config['MYSQL_PASSWORD']:
+            kwargs['passwd'] = app.config['MYSQL_PASSWORD']
 
-        if current_app.config['MYSQL_DB']:
-            kwargs['db'] = current_app.config['MYSQL_DB']
+        if app.config['MYSQL_DB']:
+            kwargs['db'] = app.config['MYSQL_DB']
 
-        if current_app.config['MYSQL_PORT']:
-            kwargs['port'] = current_app.config['MYSQL_PORT']
+        if app.config['MYSQL_PORT']:
+            kwargs['port'] = app.config['MYSQL_PORT']
 
-        if current_app.config['MYSQL_UNIX_SOCKET']:
-            kwargs['unix_socket'] = current_app.config['MYSQL_UNIX_SOCKET']
+        if app.config['MYSQL_UNIX_SOCKET']:
+            kwargs['unix_socket'] = app.config['MYSQL_UNIX_SOCKET']
 
-        if current_app.config['MYSQL_CONNECT_TIMEOUT']:
+        if app.config['MYSQL_CONNECT_TIMEOUT']:
             kwargs['connect_timeout'] = \
-                current_app.config['MYSQL_CONNECT_TIMEOUT']
+                app.config['MYSQL_CONNECT_TIMEOUT']
 
-        if current_app.config['MYSQL_READ_DEFAULT_FILE']:
+        if app.config['MYSQL_READ_DEFAULT_FILE']:
             kwargs['read_default_file'] = \
-                current_app.config['MYSQL_READ_DEFAULT_FILE']
+                app.config['MYSQL_READ_DEFAULT_FILE']
 
-        if current_app.config['MYSQL_USE_UNICODE']:
-            kwargs['use_unicode'] = current_app.config['MYSQL_USE_UNICODE']
+        if app.config['MYSQL_USE_UNICODE']:
+            kwargs['use_unicode'] = app.config['MYSQL_USE_UNICODE']
 
-        if current_app.config['MYSQL_CHARSET']:
-            kwargs['charset'] = current_app.config['MYSQL_CHARSET']
+        if app.config['MYSQL_CHARSET']:
+            kwargs['charset'] = app.config['MYSQL_CHARSET']
 
-        if current_app.config['MYSQL_SQL_MODE']:
-            kwargs['sql_mode'] = current_app.config['MYSQL_SQL_MODE']
+        if app.config['MYSQL_SQL_MODE']:
+            kwargs['sql_mode'] = app.config['MYSQL_SQL_MODE']
 
-        if current_app.config['MYSQL_CURSORCLASS']:
-            kwargs['cursorclass'] = getattr(cursors, current_app.config['MYSQL_CURSORCLASS'])
+        if app.config['MYSQL_CURSORCLASS']:
+            kwargs['cursorclass'] = getattr(cursors, app.config['MYSQL_CURSORCLASS'])
 
         self.pooled_db = PooledDB(
             creator=MySQLdb,  # Modules using linked databases
