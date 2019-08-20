@@ -33,6 +33,10 @@ class MySQL(object):
         app.config.setdefault('MYSQL_SQL_MODE', None)
         app.config.setdefault('MYSQL_CURSORCLASS', None)
 
+        app.config.setdefault('POOL_MAXCONNECTIONS', None)
+        app.config.setdefault('POOL_MAXCACHED', None)
+        app.config.setdefault('POOL_MINCACHED', None)
+
         if hasattr(app, 'teardown_appcontext'):
             app.teardown_appcontext(self.teardown)
 
