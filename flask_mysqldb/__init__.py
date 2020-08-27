@@ -32,6 +32,7 @@ class MySQL(object):
         app.config.setdefault('MYSQL_CHARSET', 'utf8')
         app.config.setdefault('MYSQL_SQL_MODE', None)
         app.config.setdefault('MYSQL_CURSORCLASS', None)
+        app.config.setdefault('MYSQL_AUTOCOMMIT', False)
 
         app.config.setdefault('POOL_MAXCONNECTIONS', None)
         app.config.setdefault('POOL_MAXCACHED', None)
@@ -80,6 +81,9 @@ class MySQL(object):
 
         if app.config['MYSQL_CURSORCLASS']:
             kwargs['cursorclass'] = getattr(cursors, app.config['MYSQL_CURSORCLASS'])
+
+        if app.config['MYSQL_AUTOCOMMIT']:
+            kwargs['autocommit'] = app.config['MYSQL_AUTOCOMMIT']
 
         if app.config['POOL_MAXCONNECTIONS']:
             kwargs['maxconnections'] = app.config['POOL_MAXCONNECTIONS']
