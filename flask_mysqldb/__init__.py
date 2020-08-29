@@ -103,7 +103,6 @@ class MySQL(object):
             maxusage=None,  # The maximum number of times a link is reused. None means unlimited.
             ping=0,
             reset=False,
-            local
             # ping MySQL On the server side, check if the service is available.# For example: 0 = None = never, 1 = Default = when it is requested, 2 = when a cursor is created, 4 = when a query is executed, 7 = always
             **kwargs
         )
